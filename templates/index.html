@@ -1,0 +1,53 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  </head>
+  <body>
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link active" href="/">HOME</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/all">Subs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/view">Views</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+    <h1>Add Alumnos</h1>
+    <form method="POST" action="/add">
+      <input type="text" name="nombre">
+      <input type="text" name="apellido">
+      <input type="submit" value="Add">
+    </form>
+
+    <h1>Listado de Alumnos</h1>
+    <table>
+      {% for dato in datos %}
+        <tr>
+          <td>
+            {{dato[0]}}
+          </td>
+          <td>
+            <form method="POST" action="./update" style="display: inline">
+              <input type="hidden" value="{{dato[0]}}" name="id">
+              <input type="text" value="{{dato[1]}}" name="nombre">
+              <input type="text" value="{{dato[2]}}" name="apellido">
+              <input type="submit" value="Update">
+            </form>
+          </td>
+          <td>
+            <form method="POST" action="./delete" style="display: inline">
+              <input type="hidden" value="{{dato[0]}}" name="id">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
